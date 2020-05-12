@@ -47,5 +47,10 @@ target_link_libraries(fcitx5platforminputcontextplugin
 
 include(ECMQueryQmake)
 query_qmake(_QT5PLUGINDIR QT_INSTALL_PLUGINS)
+if(NOT CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    query_qmake(_QT5PREFIX QT_INSTALL_PREFIX)
+    string(REPLACE "${_QT5PREFIX}" "${CMAKE_INSTALL_PREFIX}"
+        _QT5PLUGINDIR  "${_QT5PLUGINDIR}")
+endif()
 set(CMAKE_INSTALL_QT5PLUGINDIR ${_QT5PLUGINDIR} CACHE PATH "Qt5 plugin dir")
 install(TARGETS fcitx5platforminputcontextplugin DESTINATION ${CMAKE_INSTALL_QT5PLUGINDIR}/platforminputcontexts)
